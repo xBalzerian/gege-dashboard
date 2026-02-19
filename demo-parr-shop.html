@@ -4,21 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop — Parr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
             --primary: #D4653B;
+            --primary-dark: #B8542F;
             --dark: #1A1A1A;
-            --light: #F5F5F5;
+            --dark-light: #2D2D2D;
+            --light: #F8F7F5;
             --white: #FFFFFF;
-            --gray: #666666;
+            --gray: #6B6B6B;
+            --gray-light: #E5E5E5;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
+        html { scroll-behavior: smooth; }
+        
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--white);
             color: var(--dark);
             line-height: 1.6;
@@ -30,45 +36,119 @@
             top: 0;
             left: 0;
             right: 0;
-            z-index: 100;
-            padding: 1.5rem 3rem;
+            z-index: 1000;
+            padding: 1.25rem 4rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: var(--white);
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--gray-light);
         }
         
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 1.75rem;
-            font-weight: 700;
-            letter-spacing: -1px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
             text-decoration: none;
             color: var(--dark);
         }
         
         .nav {
             display: flex;
-            gap: 2.5rem;
+            gap: 3rem;
+            align-items: center;
         }
         
         .nav a {
             text-decoration: none;
             color: var(--dark);
-            font-size: 0.875rem;
+            font-size: 0.8125rem;
             font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.3s;
+            letter-spacing: 1.5px;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
         }
         
-        .nav a:hover, .nav a.active {
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav a:hover::after,
+        .nav a.active::after {
+            width: 100%;
+        }
+        
+        .nav a:hover,
+        .nav a.active {
             color: var(--primary);
         }
         
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        .mobile-menu-btn span {
+            width: 24px;
+            height: 2px;
+            background: var(--dark);
+            transition: var(--transition);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--white);
+            z-index: 999;
+            padding: 6rem 2rem 2rem;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .mobile-menu.active {
+            display: flex;
+        }
+        
+        .mobile-menu a {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            text-decoration: none;
+            color: var(--dark);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .mobile-menu-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        /* Cart Icon */
         .cart-icon {
             position: relative;
+            cursor: pointer;
         }
         
         .cart-count {
@@ -84,73 +164,106 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: 600;
         }
         
         /* Page Header */
         .page-header {
-            padding: 10rem 3rem 4rem;
+            padding: 10rem 4rem 3rem;
             background: var(--light);
             text-align: center;
         }
         
         .page-title {
             font-family: 'Playfair Display', serif;
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-count {
+            color: var(--gray);
+            font-size: 0.9375rem;
         }
         
         /* Filters */
-        .filters {
-            padding: 2rem 3rem;
-            border-bottom: 1px solid #eee;
+        .filters-bar {
+            padding: 1.5rem 4rem;
+            border-bottom: 1px solid var(--gray-light);
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .filter-tabs {
+            display: flex;
             gap: 2rem;
         }
         
-        .filter-btn {
-            padding: 0.75rem 1.5rem;
-            background: transparent;
-            border: 1px solid #ddd;
-            font-size: 0.875rem;
+        .filter-tab {
+            background: none;
+            border: none;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray);
             cursor: pointer;
-            transition: all 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
         }
         
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--dark);
-            color: var(--white);
-            border-color: var(--dark);
+        .filter-tab.active,
+        .filter-tab:hover {
+            color: var(--dark);
+        }
+        
+        .filter-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .sort-select {
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--gray-light);
+            font-size: 0.875rem;
+            background: var(--white);
+            cursor: pointer;
         }
         
         /* Shop Grid */
         .shop {
-            padding: 4rem 3rem;
-            max-width: 1400px;
+            padding: 4rem;
+            max-width: 1600px;
             margin: 0 auto;
         }
         
         .products-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
+            gap: 2.5rem;
         }
         
-        .product-card {
+        .product {
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: var(--transition);
         }
         
-        .product-card:hover {
+        .product:hover {
             transform: translateY(-8px);
         }
         
         .product-image {
             aspect-ratio: 3/4;
-            background: #f5f5f5;
+            background: var(--light);
             overflow: hidden;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
             position: relative;
         }
         
@@ -158,10 +271,10 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .product-card:hover .product-image img {
+        .product:hover .product-image img {
             transform: scale(1.05);
         }
         
@@ -169,187 +282,585 @@
             position: absolute;
             top: 1rem;
             left: 1rem;
-            background: var(--primary);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            font-size: 0.75rem;
+            background: var(--dark);
+            color: var(--white);
+            padding: 0.375rem 0.875rem;
+            font-size: 0.625rem;
             font-weight: 600;
             text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .product-badge.sale {
+            background: var(--primary);
+        }
+        
+        .product-actions {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: rgba(255,255,255,0.95);
+            transform: translateY(100%);
+            transition: var(--transition);
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .product:hover .product-actions {
+            transform: translateY(0);
+        }
+        
+        .product-btn {
+            flex: 1;
+            padding: 0.75rem;
+            background: var(--dark);
+            color: var(--white);
+            border: none;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .product-btn:hover {
+            background: var(--primary);
+        }
+        
+        .product-btn.wishlist {
+            flex: 0 0 44px;
+            background: var(--white);
+            color: var(--dark);
+            border: 1px solid var(--gray-light);
+        }
+        
+        .product-btn.wishlist:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+        
+        .product-info {
+            padding: 0 0.5rem;
         }
         
         .product-name {
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 0.5rem;
+            transition: var(--transition);
+            text-decoration: none;
+            color: var(--dark);
+            display: block;
+        }
+        
+        .product:hover .product-name {
+            color: var(--primary);
         }
         
         .product-price {
-            color: var(--gray);
-            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9375rem;
         }
         
-        .product-price .sale {
+        .price-current {
+            font-weight: 600;
+        }
+        
+        .price-original {
+            color: #999;
+            text-decoration: line-through;
+        }
+        
+        .price-sale {
             color: var(--primary);
             font-weight: 600;
-            margin-right: 0.5rem;
         }
         
-        .product-price .original {
-            text-decoration: line-through;
-            color: #999;
+        .product-colors {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+        
+        .color-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .color-dot:hover,
+        .color-dot.active {
+            border-color: var(--dark);
+        }
+        
+        /* Pagination */
+        .pagination {
+            padding: 4rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .page-btn {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--gray-light);
+            background: var(--white);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .page-btn:hover,
+        .page-btn.active {
+            background: var(--dark);
+            color: var(--white);
+            border-color: var(--dark);
         }
         
         /* Footer */
         .footer {
-            padding: 4rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #e5e5e5;
+            padding: 5rem 4rem 2rem;
+            background: var(--dark);
+            color: var(--white);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+        
+        .footer-brand {
+            max-width: 300px;
         }
         
         .footer-logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            color: var(--white);
+            text-decoration: none;
         }
         
-        .footer-nav {
+        .footer-desc {
+            color: #999;
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        
+        .social {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
         }
         
-        .footer-nav a {
-            color: var(--gray);
+        .social a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
             text-decoration: none;
             font-size: 0.875rem;
+            transition: var(--transition);
         }
         
-        @media (max-width: 1024px) {
+        .social a:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .footer-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+        }
+        
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-copy {
+            color: #666;
+            font-size: 0.8125rem;
+        }
+        
+        .footer-payment {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.75rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
             .products-grid { grid-template-columns: repeat(3, 1fr); }
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 1rem 1.5rem; }
             .nav { display: none; }
-            .filters { flex-wrap: wrap; }
+            .mobile-menu-btn { display: flex; }
+            .products-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .shop { padding: 2rem 1.5rem; }
+            .page-header { padding: 8rem 1.5rem 2rem; }
+            .filters-bar { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+            .filter-tabs { flex-wrap: wrap; justify-content: center; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer { padding: 3rem 1.5rem 2rem; }
         }
     </style>
 </head>
 <body>
     <header class="header">
         <a href="demo-parr.html" class="logo">PARR</a>
+        
         <nav class="nav">
             <a href="demo-parr.html">Home</a>
-            <a href="demo-parr-about.html">About</a>
             <a href="demo-parr-shop.html" class="active">Shop</a>
-            <a href="demo-parr-blog.html">Blog</a>
+            <a href="demo-parr-about.html">About</a>
+            <a href="demo-parr-blog.html">Journal</a>
             <a href="demo-parr-contact.html">Contact</a>
         </nav>
+        
         <div class="cart-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                 <line x1="3" y1="6" x2="21" y2="6"></line>
                 <path d="M16 10a4 4 0 0 1-8 0"></path>
             </svg>
             <span class="cart-count">2</span>
         </div>
+        
+        <div class="mobile-menu-btn" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-close" onclick="toggleMenu()">×</div>
+        <a href="demo-parr.html">Home</a>
+        <a href="demo-parr-shop.html">Shop</a>
+        <a href="demo-parr-about.html">About</a>
+        <a href="demo-parr-blog.html">Journal</a>
+        <a href="demo-parr-contact.html">Contact</a>
+    </div>
 
     <section class="page-header">
         <h1 class="page-title">Shop</h1>
+        <div class="page-count">24 Products</div>
     </section>
 
-    <div class="filters">
-        <button class="filter-btn active">All</button>
-        <button class="filter-btn">New Arrivals</button>
-        <button class="filter-btn">Clothing</button>
-        <button class="filter-btn">Accessories</button>
-        <button class="filter-btn">Sale</button>
+    <div class="filters-bar">
+        <div class="filter-tabs">
+            <button class="filter-tab active">All</button>
+            <button class="filter-tab">New Arrivals</button>
+            <button class="filter-tab">Clothing</button>
+            <button class="filter-tab">Accessories</button>
+            <button class="filter-tab">Sale</button>
+        </div>
+        
+        <select class="sort-select">
+            <option>Sort by: Featured</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Newest</option>
+        </select>
     </div>
 
     <section class="shop">
         <div class="products-grid">
-            <a href="demo-parr-product.html" class="product-card">
-                <div class="product-image">
+            <!-- Product 1 -->
+            <article class="product">
+                <a href="demo-parr-product.html" class="product-image">
                     <span class="product-badge">New</span>
                     <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600" alt="Linen Blazer">
+                    <div class="product-actions">
+                        <button class="product-btn">Quick Add</button>
+                        <button class="product-btn wishlist">♡</button>
+                    </div>
+                </a>
+                <div class="product-info">
+                    <a href="demo-parr-product.html" class="product-name">Oversized Linen Blazer</a>
+                    <div class="product-price">
+                        <span class="price-current">$189</span>
+                    </div>
+                    <div class="product-colors">
+                        <span class="color-dot active" style="background: #C4A77D;"></span>
+                        <span class="color-dot" style="background: #2D2D2D;"></span>
+                        <span class="color-dot" style="background: #F5F5F5;"></span>
+                    </div>
                 </div>
-                <div class="product-name">Oversized Linen Blazer</div>
-                <div class="product-price">$189</div>
-            </a>
-            
-            <a href="demo-parr-product.html" class="product-card">
-                <div class="product-image">
+            </article>
+
+            <!-- Product 2 -->
+            <article class="product">
+                <a href="demo-parr-product.html" class="product-image">
                     <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600" alt="Silk Dress">
+                    <div class="product-actions">
+                        <button class="product-btn">Quick Add</button>
+                        <button class="product-btn wishlist">♡</button>
+                    </div>
+                </a>
+                <div class="product-info">
+                    <a href="demo-parr-product.html" class="product-name">Silk Midi Dress</a>
+                    <div class="product-price">
+                        <span class="price-current">$245</span>
+                    </div>
+                    <div class="product-colors">
+                        <span class="color-dot active" style="background: #E8D4C4;"></span>
+                        <span class="color-dot" style="background: #1A1A1A;"></span>
+                    </div>
                 </div>
-                <div class="product-name">Silk Midi Dress</div>
-                <div class="product-price">$245</div>
-            </a>
-            
-            <a href="demo-parr-product.html" class="product-card">
-                <div class="product-image">
-                    <span class="product-badge">Sale</span>
+            </article>
+
+            <!-- Product 3 (Sale) -->
+            <article class="product">
+                <a href="demo-parr-product.html" class="product-image">
+                    <span class="product-badge sale">Sale</span>
                     <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600" alt="Wool Coat">
+                    <div class="product-actions">
+                        <button class="product-btn">Quick Add</button>
+                        <button class="product-btn wishlist">♡</button>
+                    </div>
+                </a>
+                <div class="product-info">
+                    <a href="demo-parr-product.html" class="product-name">Wool Trench Coat</a>
+                    <div class="product-price">
+                        <span class="price-sale">$299</span>
+                        <span class="price-original">$450</span>
+                    </div>
+                    <div class="product-colors">
+                        <span class="color-dot active" style="background: #8B7355;"></span>
+                        <span class="color-dot" style="background: #2F2F2F;"></span>
+                    </div>
                 </div>
-                <div class="product-name">Wool Trench Coat</div>
-                <div class="product-price">
-                    <span class="sale">$299</span>
-                    <span class="original">$450</span>
-                </div>
-            </a>
-            
-            <a href="demo-parr-product.html" class="product-card">
-                <div class="product-image">
+            </article>
+
+            <!-- Product 4 -->
+            <article class="product">
+                <a href="demo-parr-product.html" class="product-image">
                     <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600" alt="Leather Bag">
+                    <div class="product-actions">
+                        <button class="product-btn">Quick Add</button>
+                        <button class="product-btn wishlist">♡</button>
+                    </div>
+                </a>
+                <div class="product-info">
+                    <a href="demo-parr-product.html" class="product-name">Structured Leather Bag</a>
+                    <div class="product-price">
+                        <span class="price-current">$320</span>
+                    </div>
+                    <div class="product-colors">
+                        <span class="color-dot active" style="background: #C9B8A7;"></span>
+                        <span class="color-dot" style="background: #1A1A1A;"></span>
+                        <span class="color-dot" style="background: #8B4513;"></span>
+                    </div>
                 </div>
-                <div class="product-name">Structured Leather Bag</div>
-                <div class="product-price">$320</div>
-            </a>
-            
-            <a href="demo-parr-product.html" class="product-card">
-                <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600" alt="Cashmere Sweater">
+            </article>
+
+            <!-- Product 5 -->
+            <article class="product">
+                <a href="demo-parr-product.html" class="product-image">
+                    <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600" alt="Cashmere">
+                    <div class="product-actions">
+                        <button class="product-btn">Quick Add</button>
+                        <button class="product-btn wishlist">♡</button>
+                    </div>
+                </a>
+                <div class="product-info">
+                    <a href="demo-parr-product.html" class="product-name">Cashmere Turtleneck</a>
+                    <div class="product-price">
+                        <span class="price-current">$165</span>
+                    </div>
+                    <div class="product-colors">
+                        <span class="color-dot active" style="background: #E8E0D5;"></span>
+                        <span class="color-dot" style="background: #2D2D2D;"></span>
+                        <span class="color-dot" style="background: #C4A77D;"></span>
+                    </div>
                 </div>
-                <div class="product-name">Cashmere Turtleneck</div>
-                <div class="product-price">$165</div>
-            </a>
-            
-            <a href="demo-parr-product.html" class="product-card">
-                <div class="product-image">
+            </article>
+
+            <!-- Product 6 -->
+            <article class="product">
+                <a href="demo-parr-product.html" class="product-image">
                     <span class="product-badge">New</span>
-                    <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600" alt="Ankle Boots">
+                    <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600" alt="Boots">
+                    <div class="product-actions">
+                        <button class="product-btn">Quick Add</button>
+                        <button class="product-btn wishlist">♡</button>
+                    </div>
+                </a>
+                <div class="product-info">
+                    <a href="demo-parr-product.html" class="product-name">Leather Ankle Boots</a>
+                    <div class="product-price">
+                        <span class="price-current">$275</span>
+                    </div>
+                    <div class="product-colors">
+                        <span class="color-dot active" style="background: #3D3D3D;"></span>
+                        <span class="color-dot" style="background: #8B4513;"></span>
+                    </div>
                 </div>
-                <div class="product-name">Leather Ankle Boots</div>
-                <div class="product-price">$275</div>
-            </a>
-            
-            <a href="demo-parr-product.html" class="product-card">
-                <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1582142306909-195724d33ffc?w=600" alt="Gold Necklace">
+            </article>
+
+            <!-- Product 7 -->
+            <article class="product">
+                <a href="demo-parr-product.html" class="product-image">
+                    <img src="https://images.unsplash.com/photo-1582142306909-195724d33ffc?w=600" alt="Necklace">
+                    <div class="product-actions">
+                        <button class="product-btn">Quick Add</button>
+                        <button class="product-btn wishlist">♡</button>
+                    </div>
+                </a>
+                <div class="product-info">
+                    <a href="demo-parr-product.html" class="product-name">Gold Chain Necklace</a>
+                    <div class="product-price">
+                        <span class="price-current">$95</span>
+                    </div>
                 </div>
-                <div class="product-name">Gold Chain Necklace</div>
-                <div class="product-price">$95</div>
-            </a>
-            
-            <a href="demo-parr-product.html" class="product-card">
-                <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1591561954557-26941169b49e?w=600" alt="Wide Leg Pants">
+            </article>
+
+            <!-- Product 8 -->
+            <article class="product">
+                <a href="demo-parr-product.html" class="product-image">
+                    <img src="https://images.unsplash.com/photo-1591561954557-26941169b49e?w=600" alt="Pants">
+                    <div class="product-actions">
+                        <button class="product-btn">Quick Add</button>
+                        <button class="product-btn wishlist">♡</button>
+                    </div>
+                </a>
+                <div class="product-info">
+                    <a href="demo-parr-product.html" class="product-name">Wide Leg Trousers</a>
+                    <div class="product-price">
+                        <span class="price-current">$145</span>
+                    </div>
+                    <div class="product-colors">
+                        <span class="color-dot active" style="background: #2D2D2D;"></span>
+                        <span class="color-dot" style="background: #C4B9AC;"></span>
+                    </div>
                 </div>
-                <div class="product-name">Wide Leg Trousers</div>
-                <div class="product-price">$145</div>
-            </a>
+            </article>
         </div>
     </section>
 
+    <div class="pagination">
+        <button class="page-btn">←</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">→</button>
+    </div>
+
     <footer class="footer">
-        <div class="footer-logo">PARR</div>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="demo-parr.html" class="footer-logo">PARR</a>
+                <p class="footer-desc">Effortless style for the modern woman. Sustainably made, designed to last. Based in New York, shipping worldwide.</p>
+                <div class="social">
+                    <a href="#">IG</a>
+                    <a href="#">FB</a>
+                    <a href="#">PI</a>
+                    <a href="#">YT</a>
+                </div>
+            </div>
+            
+            <div>
+                <div class="footer-title">Shop</div>
+                <ul class="footer-links">
+                    <li><a href="demo-parr-shop.html">New Arrivals</a></li>
+                    <li><a href="demo-parr-shop.html">Clothing</a></li>
+                    <li><a href="demo-parr-shop.html">Accessories</a></li>
+                    <li><a href="demo-parr-shop.html">Sale</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <div class="footer-title">Company</div>
+                <ul class="footer-links">
+                    <li><a href="demo-parr-about.html">About Us</a></li>
+                    <li><a href="demo-parr-blog.html">Journal</a></li>
+                    <li><a href="demo-parr-contact.html">Contact</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <div class="footer-title">Support</div>
+                <ul class="footer-links">
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                </ul>
+            </div>
+        </div>
         
-        <nav class="footer-nav">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Contact</a>
-        </nav>
+        <div class="footer-bottom">
+            <div class="footer-copy">© 2025 Parr. All rights reserved.</div>
+            <div class="footer-payment">
+                <span>Visa</span>
+                <span>Mastercard</span>
+                <span>Amex</span>
+                <span>PayPal</span>
+            </div>
+        </div>
     </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
