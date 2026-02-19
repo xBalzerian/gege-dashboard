@@ -148,5 +148,98 @@
             </div>
         </main>
     </div>
+    <script>
+        // Task Board Functionality
+        let tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+        
+        function saveTasks() {
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            renderTasks();
+        }
+        
+        function renderTasks() {
+            const columns = {
+                'backlog': document.querySelector('.board-column:nth-child(1)'),
+                'progress': document.querySelector('.board-column:nth-child(2)'),
+                'review': document.querySelector('.board-column:nth-child(3)'),
+                'done': document.querySelector('.board-column:nth-child(4)')
+            };
+            
+            // Clear existing task cards (keep headers)
+            Object.keys(columns).forEach(key => {
+                const col = columns[key];
+                const cards = col.querySelectorAll('.task-card');
+                cards.forEach(c => c.remove());
+            });
+            
+            // Render tasks
+            tasks.forEach((task, index) => {
+                const card = document.createElement('div');
+                card.className = 'task-card';
+                card.draggable = true;
+                card.innerHTML = `
+                    <div class="task-title">${task.title}</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-${task.tag}">${task.tag}</span>
+                        <span class="task-avatar">${task.assignee}</span>
+                        <button onclick="deleteTask(${index})" style="margin-left:auto;background:none;border:none;color:#888;cursor:pointer;">×</button>
+                    </div>
+                `;
+                
+                // Drag events
+                card.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('text/plain', index);
+                });
+                
+                columns[task.status].appendChild(card);
+            });
+            
+            // Update counts
+            updateCounts();
+        }
+        
+        function updateCounts() {
+            const counts = { backlog: 0, progress: 0, review: 0, done: 0 };
+            tasks.forEach(t => counts[t.status]++);
+            document.querySelectorAll('.board-count').forEach((el, i) => {
+                const keys = ['backlog', 'progress', 'review', 'done'];
+                el.textContent = counts[keys[i]];
+            });
+        }
+        
+        function deleteTask(index) {
+            tasks.splice(index, 1);
+            saveTasks();
+        }
+        
+        // New Task Button
+        document.querySelector('.btn').addEventListener('click', () => {
+            const title = prompt('Task title:');
+            if (title) {
+                tasks.push({
+                    title: title,
+                    tag: 'dev',
+                    assignee: 'G',
+                    status: 'backlog'
+                });
+                saveTasks();
+            }
+        });
+        
+        // Drop zones
+        document.querySelectorAll('.board-column').forEach((col, index) => {
+            const keys = ['backlog', 'progress', 'review', 'done'];
+            col.addEventListener('dragover', (e) => e.preventDefault());
+            col.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const taskIndex = parseInt(e.dataTransfer.getData('text/plain'));
+                tasks[taskIndex].status = keys[index];
+                saveTasks();
+            });
+        });
+        
+        // Initial render
+        renderTasks();
+    </script>
 </body>
 </html>

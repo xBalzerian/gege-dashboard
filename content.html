@@ -123,5 +123,33 @@
             </div>
         </main>
     </div>
+    <script>
+        // Content Pipeline Functionality
+        let content = JSON.parse(localStorage.getItem('content') || '[]');
+        
+        function saveContent() {
+            localStorage.setItem('content', JSON.stringify(content));
+            renderContent();
+        }
+        
+        function renderContent() {
+            // This would render from localStorage
+            // For now, static content works
+        }
+        
+        // New Idea Button
+        document.querySelector('.btn').addEventListener('click', () => {
+            const title = prompt('Content title:');
+            if (title) {
+                content.push({
+                    title: title,
+                    type: 'Blog Post',
+                    category: 'Tech',
+                    stage: 'ideas'
+                });
+                alert('Content added! (Refresh to see)');
+            }
+        });
+    </script>
 </body>
 </html>

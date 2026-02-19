@@ -103,5 +103,17 @@
             </div>
         </main>
     </div>
+    <script>
+        // Dashboard - Live Stats
+        function updateStats() {
+            const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+            const content = JSON.parse(localStorage.getItem('content') || '[]');
+            
+            document.querySelector('.stat-value').textContent = tasks.filter(t => t.status !== 'done').length;
+            document.querySelectorAll('.stat-value')[1].textContent = content.length;
+        }
+        
+        updateStats();
+    </script>
 </body>
 </html>

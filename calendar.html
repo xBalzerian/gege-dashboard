@@ -127,5 +127,54 @@
             </div>
         </main>
     </div>
+    <script>
+        // Calendar Functionality
+        let events = JSON.parse(localStorage.getItem('calendarEvents') || '[]');
+        
+        function saveEvents() {
+            localStorage.setItem('calendarEvents', JSON.stringify(events));
+            renderCalendar();
+        }
+        
+        function renderCalendar() {
+            // Clear existing events
+            document.querySelectorAll('.cal-event').forEach(e => e.remove());
+            
+            // Add events to days
+            events.forEach(event => {
+                const day = document.querySelector(`.cal-day:nth-child(${event.day + 5})`); // +5 for offset
+                if (day) {
+                    const ev = document.createElement('div');
+                    ev.className = `cal-event ${event.type}`;
+                    ev.textContent = event.text;
+                    day.appendChild(ev);
+                }
+            });
+        }
+        
+        // Add event on click
+        document.querySelectorAll('.cal-day').forEach((day, index) => {
+            day.addEventListener('click', () => {
+                const text = prompt('Add event:');
+                if (text) {
+                    events.push({
+                        day: index,
+                        text: text,
+                        type: 'ev-task'
+                    });
+                    saveEvents();
+                }
+            });
+        });
+        
+        // Navigation buttons
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                alert('Month navigation coming soon!');
+            });
+        });
+        
+        renderCalendar();
+    </script>
 </body>
 </html>
