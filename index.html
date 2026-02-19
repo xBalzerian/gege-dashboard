@@ -1367,11 +1367,42 @@ document.querySelectorAll('.card, .nav-btn, .list-item').forEach(el => {
   el.addEventListener('touchstart', () => {
     el.style.transform = 'scale(0.98)';
   }, { passive: true });
-  
+
   el.addEventListener('touchend', () => {
     el.style.transform = '';
   }, { passive: true });
 });
+
+// Real-time data updates
+function updateLiveData() {
+  const now = new Date();
+  const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+  // Update any elements with data-live attribute
+  document.querySelectorAll('[data-live="time"]').forEach(el => {
+    el.textContent = timeString;
+  });
+
+  // Simulate live stats (replace with real API calls)
+  const stats = {
+    requests: Math.floor(Math.random() * 100) + 50,
+    tokens: Math.floor(Math.random() * 50) + 20,
+    images: 57 + Math.floor(Math.random() * 5)
+  };
+
+  document.querySelectorAll('[data-stat="requests"]').forEach(el => {
+    el.textContent = stats.requests;
+  });
+}
+
+// Update every 30 seconds
+setInterval(updateLiveData, 30000);
+updateLiveData(); // Initial call
+
+// Auto-refresh dashboard data every 5 minutes
+setInterval(() => {
+  location.reload();
+}, 300000);
 </script>
 
 </body>
