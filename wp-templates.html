@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WP Template Studio - Premium Elementor Templates</title>
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #1a1a2e;
+            --accent: #6366f1;
+            --accent-hover: #4f46e5;
+            --success: #10b981;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-600: #4b5563;
+            --gray-800: #1f2937;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+        }
+        
+        /* Header */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--gray-600);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* Search & Filter */
+        .toolbar {
+            background: var(--white);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .toolbar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 0.875rem 1rem 0.875rem 2.75rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 1rem center;
+            margin-bottom: 1rem;
+        }
+        
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-tab {
+            padding: 0.625rem 1.25rem;
+            border-radius: 50px;
+            border: none;
+            background: transparent;
+            color: var(--gray-600);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .filter-tab:hover {
+            background: var(--gray-100);
+        }
+        
+        .filter-tab.active {
+            background: var(--gray-800);
+            color: var(--white);
+        }
+        
+        /* Templates Grid */
+        .templates-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .category-section {
+            margin-bottom: 3rem;
+        }
+        
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--gray-800);
+        }
+        
+        .category-desc {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+        }
+        
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+            gap: 2rem;
+        }
+        
+        .template-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        
+        .template-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+        
+        .template-preview {
+            position: relative;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            background: var(--gray-100);
+        }
+        
+        .template-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .template-card:hover .template-preview img {
+            transform: scale(1.03);
+        }
+        
+        .template-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .template-card:hover .template-overlay {
+            opacity: 1;
+        }
+        
+        .overlay-btn {
+            padding: 0.875rem 1.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        
+        .btn-demo {
+            background: var(--white);
+            color: var(--gray-800);
+        }
+        
+        .btn-demo:hover {
+            background: var(--gray-100);
+        }
+        
+        .btn-buy {
+            background: var(--accent);
+            color: var(--white);
+        }
+        
+        .btn-buy:hover {
+            background: var(--accent-hover);
+        }
+        
+        .template-info {
+            padding: 1.25rem;
+        }
+        
+        .template-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .template-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.75rem;
+        }
+        
+        .template-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .template-price span {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            text-decoration: line-through;
+            margin-left: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .premium-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--white);
+            border-radius: 16px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-600);
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+        
+        .modal-preview {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+        
+        .modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .modal-price span {
+            font-size: 1rem;
+            color: var(--gray-600);
+            text-decoration: line-through;
+            margin-left: 0.5rem;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+        }
+        
+        /* PayPal Button Container */
+        #paypal-button-container {
+            min-width: 200px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .templates-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .template-overlay {
+                opacity: 1;
+                background: rgba(0,0,0,0.3);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">WP Template Studio</div>
+            <nav class="nav-links">
+                <a href="#all">All Templates</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#support">Support</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <div class="toolbar-content">
+            <input type="text" class="search-box" placeholder="Search templates...">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">All</button>
+                <button class="filter-tab" data-filter="planners">Planners & Journals</button>
+                <button class="filter-tab" data-filter="notion">Notion & Templates</button>
+                <button class="filter-tab" data-filter="art">Art & Design</button>
+                <button class="filter-tab" data-filter="courses">Courses & Ebooks</button>
+                <button class="filter-tab" data-filter="business">Business</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Templates -->
+    <div class="templates-container">
+        
+        <!-- Category: Planners & Journals -->
+        <div class="category-section" data-category="planners">
+            <h2 class="category-title">📚 Planners & Journals</h2>
+            <p class="category-desc">Beautiful templates for ADHD planners, daily journals, and productivity tools</p>
+            
+            <div class="templates-grid">
+                <!-- Template 1: Ocean Calm -->
+                <div class="template-card" onclick="openModal('ocean-calm')">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x500/0ea5e9/ffffff?text=Ocean+Calm+Planner+Shop" alt="Ocean Calm">
+                        <div class="template-overlay">
+                            <button class="overlay-btn btn-demo" onclick="event.stopPropagation(); demoTemplate('ocean-calm')">👁️ Live Demo</button>
+                            <button class="overlay-btn btn-buy" onclick="event.stopPropagation(); buyTemplate('ocean-calm')">🛒 Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-name">Ocean Calm Planner Shop</h3>
+                        <div class="template-meta">
+                            <span class="template-price">$149 <span>$299</span></span>
+                            <span class="premium-badge">⭐ Premium</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 2: Sage Mind -->
+                <div class="template-card" onclick="openModal('sage-mind')">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x500/10b981/ffffff?text=Sage+Mind+Journal+Shop" alt="Sage Mind">
+                        <div class="template-overlay">
+                            <button class="overlay-btn btn-demo" onclick="event.stopPropagation(); demoTemplate('sage-mind')">👁️ Live Demo</button>
+                            <button class="overlay-btn btn-buy" onclick="event.stopPropagation(); buyTemplate('sage-mind')">🛒 Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-name">Sage Mind Journal Shop</h3>
+                        <div class="template-meta">
+                            <span class="template-price">$149 <span>$299</span></span>
+                            <span class="premium-badge">⭐ Premium</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 3: Dusk Focus -->
+                <div class="template-card" onclick="openModal('dusk-focus')">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x500/a855f7/ffffff?text=Dusk+Focus+Planner" alt="Dusk Focus">
+                        <div class="template-overlay">
+                            <button class="overlay-btn btn-demo" onclick="event.stopPropagation(); demoTemplate('dusk-focus')">👁️ Live Demo</button>
+                            <button class="overlay-btn btn-buy" onclick="event.stopPropagation(); buyTemplate('dusk-focus')">🛒 Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-name">Dusk Focus Planner Shop</h3>
+                        <div class="template-meta">
+                            <span class="template-price">$149 <span>$299</span></span>
+                            <span class="premium-badge">⭐ Premium</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category: Notion & Templates -->
+        <div class="category-section" data-category="notion">
+            <h2 class="category-title">📋 Notion & Templates</h2>
+            <p class="category-desc">Modern, minimal designs for Notion templates, Excel sheets, and digital tools</p>
+            
+            <div class="templates-grid">
+                <!-- Template 4: Notion Pro -->
+                <div class="template-card" onclick="openModal('notion-pro')">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x500/1e293b/ffffff?text=Notion+Pro+Shop" alt="Notion Pro">
+                        <div class="template-overlay">
+                            <button class="overlay-btn btn-demo" onclick="event.stopPropagation(); demoTemplate('notion-pro')">👁️ Live Demo</button>
+                            <button class="overlay-btn btn-buy" onclick="event.stopPropagation(); buyTemplate('notion-pro')">🛒 Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-name">Notion Pro Template Shop</h3>
+                        <div class="template-meta">
+                            <span class="template-price">$149 <span>$299</span></span>
+                            <span class="premium-badge">⭐ Premium</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 5: Minimal Template -->
+                <div class="template-card" onclick="openModal('minimal-template')">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x500/f8fafc/334155?text=Minimal+Template+Store" alt="Minimal">
+                        <div class="template-overlay">
+                            <button class="overlay-btn btn-demo" onclick="event.stopPropagation(); demoTemplate('minimal-template')">👁️ Live Demo</button>
+                            <button class="overlay-btn btn-buy" onclick="event.stopPropagation(); buyTemplate('minimal-template')">🛒 Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-name">Minimal Template Store</h3>
+                        <div class="template-meta">
+                            <span class="template-price">$149 <span>$299</span></span>
+                            <span class="premium-badge">⭐ Premium</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category: Art & Design -->
+        <div class="category-section" data-category="art">
+            <h2 class="category-title">🎨 Art & Design</h2>
+            <p class="category-desc">Visual-heavy designs for wall art, digital downloads, and creative products</p>
+            
+            <div class="templates-grid">
+                <!-- Template 6: Art Gallery -->
+                <div class="template-card" onclick="openModal('art-gallery')">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x500/ec4899/ffffff?text=Art+Gallery+Shop" alt="Art Gallery">
+                        <div class="template-overlay">
+                            <button class="overlay-btn btn-demo" onclick="event.stopPropagation(); demoTemplate('art-gallery')">👁️ Live Demo</button>
+                            <button class="overlay-btn btn-buy" onclick="event.stopPropagation(); buyTemplate('art-gallery')">🛒 Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-name">Art Gallery Shop</h3>
+                        <div class="template-meta">
+                            <span class="template-price">$149 <span>$299</span></span>
+                            <span class="premium-badge">⭐ Premium</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 7: Creative Studio -->
+                <div class="template-card" onclick="openModal('creative-studio')">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x500/f59e0b/ffffff?text=Creative+Studio" alt="Creative Studio">
+                        <div class="template-overlay">
+                            <button class="overlay-btn btn-demo" onclick="event.stopPropagation(); demoTemplate('creative-studio')">👁️ Live Demo</button>
+                            <button class="overlay-btn btn-buy" onclick="event.stopPropagation(); buyTemplate('creative-studio')">🛒 Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-name">Creative Studio Shop</h3>
+                        <div class="template-meta">
+                            <span class="template-price">$149 <span>$299</span></span>
+                            <span class="premium-badge">⭐ Premium</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category: Courses & Ebooks -->
+        <div class="category-section" data-category="courses">
+            <h2 class="category-title">📖 Courses & Ebooks</h2>
+            <p class="category-desc">Educational-focused designs for coaches, authors, and course creators</p>
+            
+            <div class="templates-grid">
+                <!-- Template 8: Course Academy -->
+                <div class="template-card" onclick="openModal('course-academy')">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x500/06b6d4/ffffff?text=Course+Academy" alt="Course Academy">
+                        <div class="template-overlay">
+                            <button class="overlay-btn btn-demo" onclick="event.stopPropagation(); demoTemplate('course-academy')">👁️ Live Demo</button>
+                            <button class="overlay-btn btn-buy" onclick="event.stopPropagation(); buyTemplate('course-academy')">🛒 Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-name">Course Academy</h3>
+                        <div class="template-meta">
+                            <span class="template-price">$199 <span>$399</span></span>
+                            <span class="premium-badge">⭐ Premium</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 9: Ebook Author -->
+                <div class="template-card" onclick="openModal('ebook-author')">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x500/8b5cf6/ffffff?text=Ebook+Author+Shop" alt="Ebook Author">
+                        <div class="template-overlay">
+                            <button class="overlay-btn btn-demo" onclick="event.stopPropagation(); demoTemplate('ebook-author')">👁️ Live Demo</button>
+                            <button class="overlay-btn btn-buy" onclick="event.stopPropagation(); buyTemplate('ebook-author')">🛒 Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-name">Ebook Author Shop</h3>
+                        <div class="template-meta">
+                            <span class="template-price">$149 <span>$299</span></span>
+                            <span class="premium-badge">⭐ Premium</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category: Business -->
+        <div class="category-section" data-category="business">
+            <h2 class="category-title">💼 Business</h2>
+            <p class="category-desc">Professional templates for agencies, consultants, and service businesses</p>
+            
+            <div class="templates-grid">
+                <!-- Template 10: Agency Pro -->
+                <div class="template-card" onclick="openModal('agency-pro')">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x500/6366f1/ffffff?text=Agency+Pro" alt="Agency Pro">
+                        <div class="template-overlay">
+                            <button class="overlay-btn btn-demo" onclick="event.stopPropagation(); demoTemplate('agency-pro')">👁️ Live Demo</button>
+                            <button class="overlay-btn btn-buy" onclick="event.stopPropagation(); buyTemplate('agency-pro')">🛒 Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-name">Agency Pro</h3>
+                        <div class="template-meta">
+                            <span class="template-price">$199 <span>$399</span></span>
+                            <span class="premium-badge">⭐ Premium</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 11: Consultant Hub -->
+                <div class="template-card" onclick="openModal('consultant-hub')">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x500/0f172a/ffffff?text=Consultant+Hub" alt="Consultant Hub">
+                        <div class="template-overlay">
+                            <button class="overlay-btn btn-demo" onclick="event.stopPropagation(); demoTemplate('consultant-hub')">👁️ Live Demo</button>
+                            <button class="overlay-btn btn-buy" onclick="event.stopPropagation(); buyTemplate('consultant-hub')">🛒 Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-name">Consultant Hub</h3>
+                        <div class="template-meta">
+                            <span class="template-price">$199 <span>$399</span></span>
+                            <span class="premium-badge">⭐ Premium</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Purchase Modal -->
+    <div class="modal" id="purchaseModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Template Name</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <img src="" alt="" class="modal-preview" id="modalImage">
+                
+                <div class="modal-features">
+                    <div class="feature-item">✓ Elementor Pro Compatible</div>
+                    <div class="feature-item">✓ WooCommerce Ready</div>
+                    <div class="feature-item">✓ Mobile Responsive</div>
+                    <div class="feature-item">✓ One-Click Import</div>
+                    <div class="feature-item">✓ Lifetime Updates</div>
+                    <div class="feature-item">✓ Premium Support</div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <div class="modal-price" id="modalPrice">$149 <span>$299</span></div>
+                <div class="modal-actions">
+                    <a href="#" class="overlay-btn btn-demo btn-large" id="demoLink" target="_blank">Live Demo</a>
+                    <div id="paypal-button-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Template Data
+        const templates = {
+            'ocean-calm': {
+                name: 'Ocean Calm Planner Shop',
+                price: 149,
+                originalPrice: 299,
+                image: 'https://placehold.co/800x500/0ea5e9/ffffff?text=Ocean+Calm+Planner+Shop',
+                demoUrl: '#demo-ocean-calm'
+            },
+            'sage-mind': {
+                name: 'Sage Mind Journal Shop',
+                price: 149,
+                originalPrice: 299,
+                image: 'https://placehold.co/800x500/10b981/ffffff?text=Sage+Mind+Journal+Shop',
+                demoUrl: '#demo-sage-mind'
+            },
+            'dusk-focus': {
+                name: 'Dusk Focus Planner Shop',
+                price: 149,
+                originalPrice: 299,
+                image: 'https://placehold.co/800x500/a855f7/ffffff?text=Dusk+Focus+Planner',
+                demoUrl: '#demo-dusk-focus'
+            },
+            'notion-pro': {
+                name: 'Notion Pro Template Shop',
+                price: 149,
+                originalPrice: 299,
+                image: 'https://placehold.co/800x500/1e293b/ffffff?text=Notion+Pro+Shop',
+                demoUrl: '#demo-notion-pro'
+            },
+            'minimal-template': {
+                name: 'Minimal Template Store',
+                price: 149,
+                originalPrice: 299,
+                image: 'https://placehold.co/800x500/f8fafc/334155?text=Minimal+Template+Store',
+                demoUrl: '#demo-minimal'
+            },
+            'art-gallery': {
+                name: 'Art Gallery Shop',
+                price: 149,
+                originalPrice: 299,
+                image: 'https://placehold.co/800x500/ec4899/ffffff?text=Art+Gallery+Shop',
+                demoUrl: '#demo-art-gallery'
+            },
+            'creative-studio': {
+                name: 'Creative Studio Shop',
+                price: 149,
+                originalPrice: 299,
+                image: 'https://placehold.co/800x500/f59e0b/ffffff?text=Creative+Studio',
+                demoUrl: '#demo-creative-studio'
+            },
+            'course-academy': {
+                name: 'Course Academy',
+                price: 199,
+                originalPrice: 399,
+                image: 'https://placehold.co/800x500/06b6d4/ffffff?text=Course+Academy',
+                demoUrl: '#demo-course-academy'
+            },
+            'ebook-author': {
+                name: 'Ebook Author Shop',
+                price: 149,
+                originalPrice: 299,
+                image: 'https://placehold.co/800x500/8b5cf6/ffffff?text=Ebook+Author+Shop',
+                demoUrl: '#demo-ebook-author'
+            },
+            'agency-pro': {
+                name: 'Agency Pro',
+                price: 199,
+                originalPrice: 399,
+                image: 'https://placehold.co/800x500/6366f1/ffffff?text=Agency+Pro',
+                demoUrl: '#demo-agency-pro'
+            },
+            'consultant-hub': {
+                name: 'Consultant Hub',
+                price: 199,
+                originalPrice: 399,
+                image: 'https://placehold.co/800x500/0f172a/ffffff?text=Consultant+Hub',
+                demoUrl: '#demo-consultant-hub'
+            }
+        };
+
+        let currentTemplate = null;
+
+        // Filter Tabs
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                document.querySelectorAll('.category-section').forEach(section => {
+                    if (filter === 'all' || section.dataset.category === filter) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Open Modal
+        function openModal(templateId) {
+            currentTemplate = templates[templateId];
+            if (!currentTemplate) return;
+
+            document.getElementById('modalTitle').textContent = currentTemplate.name;
+            document.getElementById('modalImage').src = currentTemplate.image;
+            document.getElementById('modalImage').alt = currentTemplate.name;
+            document.getElementById('modalPrice').innerHTML = `$${currentTemplate.price} <span>$${currentTemplate.originalPrice}</span>`;
+            document.getElementById('demoLink').href = currentTemplate.demoUrl;
+
+            document.getElementById('purchaseModal').classList.add('active');
+
+            // Render PayPal Button
+            renderPayPalButton(currentTemplate.price, currentTemplate.name);
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById('purchaseModal').classList.remove('active');
+            currentTemplate = null;
+        }
+
+        // Demo Template
+        function demoTemplate(templateId) {
+            const template = templates[templateId];
+            if (template) {
+                window.open(template.demoUrl, '_blank');
+            }
+        }
+
+        // Buy Template
+        function buyTemplate(templateId) {
+            openModal(templateId);
+        }
+
+        // Render PayPal Button
+        function renderPayPalButton(amount, itemName) {
+            const container = document.getElementById('paypal-button-container');
+            container.innerHTML = '';
+
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: amount.toString()
+                            },
+                            description: itemName
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        alert('Thank you for your purchase! Check your email for the template download link.');
+                        closeModal();
+                    });
+                },
+                onError: function(err) {
+                    console.error('PayPal Error:', err);
+                    alert('There was an error processing your payment. Please try again.');
+                }
+            }).render('#paypal-button-container');
+        }
+
+        // Close modal on outside click
+        document.getElementById('purchaseModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>
