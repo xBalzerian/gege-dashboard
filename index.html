@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="-1">
-    <meta name="version" content="2.1">
+    <meta http-equiv="Expires" content="0">
+    <meta name="version" content="2.2">
     <title>Gege · Mission Control</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Permanent cache buster - change this number on every deploy */
+        /* v2.2 - Calendar fix */
+        
         :root {
             --sakura: #ff8fa3;
             --sakura-light: #ffb3c1;
@@ -1345,9 +1348,10 @@
         setInterval(updateTime, 1000);
         updateTime();
 
-        // Auto-refresh every 30 seconds for faster updates
+        // Auto-refresh with cache busting
         setInterval(() => {
-            location.reload();
+            const timestamp = new Date().getTime();
+            window.location.href = window.location.pathname + '?v=2.2&t=' + timestamp;
         }, 30000);
     </script>
 </body>
