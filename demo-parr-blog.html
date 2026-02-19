@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog — Parr</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #D4653B;
+            --dark: #1A1A1A;
+            --light: #F5F5F5;
+            --white: #FFFFFF;
+            --gray: #666666;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            border-bottom: 1px solid #eee;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-decoration: none;
+            color: var(--dark);
+        }
+        
+        .nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+        
+        .nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        
+        .nav a:hover, .nav a.active {
+            color: var(--primary);
+        }
+        
+        /* Page Header */
+        .page-header {
+            padding: 10rem 3rem 4rem;
+            background: var(--light);
+            text-align: center;
+        }
+        
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .page-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray);
+        }
+        
+        /* Categories */
+        .categories {
+            padding: 2rem 3rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+        }
+        
+        .category {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        
+        .category:hover, .category.active {
+            color: var(--primary);
+        }
+        
+        /* Blog Grid */
+        .blog {
+            padding: 4rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .featured-post {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .featured-image {
+            aspect-ratio: 4/3;
+            background: #f5f5f5;
+            overflow: hidden;
+        }
+        
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .featured-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .post-category {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .post-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            text-decoration: none;
+            color: var(--dark);
+        }
+        
+        .post-excerpt {
+            color: var(--gray);
+            font-size: 1.125rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .post-meta {
+            font-size: 0.875rem;
+            color: #999;
+        }
+        
+        /* Posts Grid */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .post-card {
+            cursor: pointer;
+        }
+        
+        .post-image {
+            aspect-ratio: 4/3;
+            background: #f5f5f5;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .post-card:hover .post-image img {
+            transform: scale(1.05);
+        }
+        
+        .post-card .post-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 4rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #e5e5e5;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .footer-nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-nav a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+        
+        @media (max-width: 768px) {
+            .featured-post { grid-template-columns: 1fr; }
+            .posts-grid { grid-template-columns: 1fr; }
+            .nav { display: none; }
+            .categories { flex-wrap: wrap; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="demo-parr.html" class="logo">PARR</a>
+        <nav class="nav">
+            <a href="demo-parr.html">Home</a>
+            <a href="demo-parr-about.html">About</a>
+            <a href="demo-parr-shop.html">Shop</a>
+            <a href="demo-parr-blog.html" class="active">Blog</a>
+            <a href="demo-parr-contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1 class="page-title">The Journal</h1>
+        <p class="page-subtitle">Stories on fashion, sustainability, and modern living.</p>
+    </section>
+
+    <div class="categories">
+        <a href="#" class="category active">All</a>
+        <a href="#" class="category">Fashion</a>
+        <a href="#" class="category">Sustainability</a>
+        <a href="#" class="category">Lifestyle</a>
+        <a href="#" class="category">Culture</a>
+    </div>
+
+    <section class="blog">
+        <article class="featured-post">
+            <a href="demo-parr-article.html" class="featured-image">
+                <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800" alt="Featured">
+            </a>
+            
+            <div class="featured-content">
+                <span class="post-category">Sustainability</span>
+                <a href="demo-parr-article.html" class="post-title">The Future of Fashion: Why Sustainability Is No Longer Optional</a>
+                <p class="post-excerpt">As consumers become more conscious of their environmental impact, the fashion industry is being forced to evolve. We explore what true sustainability looks like and how brands can adapt.</p>
+                <div class="post-meta">By Sarah Chen · February 15, 2025 · 8 min read</div>
+            </div>
+        </article>
+
+        <div class="posts-grid">
+            <article class="post-card">
+                <a href="demo-parr-article.html" class="post-image">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600" alt="Post">
+                </a>
+                <span class="post-category">Fashion</span>
+                <a href="demo-parr-article.html" class="post-title">The Art of the Capsule Wardrobe</a>
+                <div class="post-meta">February 12, 2025 · 5 min</div>
+            </article>
+
+            <article class="post-card">
+                <a href="demo-parr-article.html" class="post-image">
+                    <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=600" alt="Post">
+                </a>
+                <span class="post-category">Culture</span>
+                <a href="demo-parr-article.html" class="post-title">Paris Fashion Week: Highlights and Trends</a>
+                <div class="post-meta">February 8, 2025 · 6 min</div>
+            </article>
+
+            <article class="post-card">
+                <a href="demo-parr-article.html" class="post-image">
+                    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600" alt="Post">
+                </a>
+                <span class="post-category">Lifestyle</span>
+                <a href="demo-parr-article.html" class="post-title">Morning Rituals of Successful Women</a>
+                <div class="post-meta">February 5, 2025 · 4 min</div>
+            </article>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-logo">PARR</div>
+        
+        <nav class="footer-nav">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Contact</a>
+        </nav>
+    </footer>
+</body>
+</html>

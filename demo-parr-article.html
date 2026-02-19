@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Future of Fashion — Parr Journal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #D4653B;
+            --dark: #1A1A1A;
+            --light: #F5F5F5;
+            --white: #FFFFFF;
+            --gray: #666666;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            border-bottom: 1px solid #eee;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-decoration: none;
+            color: var(--dark);
+        }
+        
+        .nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+        
+        .nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        
+        .nav a:hover, .nav a.active {
+            color: var(--primary);
+        }
+        
+        /* Article */
+        .article-header {
+            padding: 10rem 3rem 4rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .article-category {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-meta {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        .article-image {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            aspect-ratio: 21/9;
+            background: #f5f5f5;
+            overflow: hidden;
+        }
+        
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .article-content {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 3rem 6rem;
+        }
+        
+        .article-content p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+        
+        .article-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 3rem 0 1.5rem;
+            color: var(--dark);
+        }
+        
+        .article-content blockquote {
+            border-left: 4px solid var(--primary);
+            padding-left: 2rem;
+            margin: 2rem 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--dark);
+        }
+        
+        /* Author */
+        .author {
+            max-width: 700px;
+            margin: 0 auto 6rem;
+            padding: 2rem 3rem;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .author-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .author-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .author-bio {
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+        
+        /* Related */
+        .related {
+            background: var(--light);
+            padding: 4rem 3rem;
+        }
+        
+        .related-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .related-card {
+            background: white;
+            overflow: hidden;
+        }
+        
+        .related-image {
+            aspect-ratio: 16/10;
+            background: #f5f5f5;
+        }
+        
+        .related-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .related-content {
+            padding: 1.5rem;
+        }
+        
+        .related-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--dark);
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 4rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #e5e5e5;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .footer-nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-nav a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+        
+        @media (max-width: 768px) {
+            .article-title { font-size: 2rem; }
+            .related-grid { grid-template-columns: 1fr; }
+            .nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="demo-parr.html" class="logo">PARR</a>
+        <nav class="nav">
+            <a href="demo-parr.html">Home</a>
+            <a href="demo-parr-about.html">About</a>
+            <a href="demo-parr-shop.html">Shop</a>
+            <a href="demo-parr-blog.html" class="active">Blog</a>
+            <a href="demo-parr-contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <article>
+        <header class="article-header">
+            <span class="article-category">Sustainability</span>
+            <h1 class="article-title">The Future of Fashion: Why Sustainability Is No Longer Optional</h1>
+            <div class="article-meta">By Sarah Chen · February 15, 2025 · 8 min read</div>
+        </header>
+
+        <div class="article-image">
+            <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200" alt="Fashion">
+        </div>
+
+        <div class="article-content">
+            <p>The fashion industry stands at a crossroads. With climate change accelerating and consumers increasingly aware of their environmental impact, the old ways of doing business are no longer tenable. Fast fashion's promise of endless novelty at rock-bottom prices has revealed its true cost: polluted waterways, exploited workers, and mountains of textile waste.</p>
+
+            <p>But amidst these challenges, a new paradigm is emerging. Forward-thinking brands are proving that sustainability and style aren't mutually exclusive. They're reimagining every aspect of the supply chain, from sourcing to shipping, creating products that are as kind to the planet as they are beautiful.</p>
+
+            <h2>The True Cost of Fashion</h2>
+
+            <p>To understand why change is necessary, we must first confront the industry's impact. Fashion is responsible for 10% of global carbon emissions—more than international flights and maritime shipping combined. The average garment is worn just seven times before being discarded. And less than 1% of clothing is recycled into new textiles.</p>
+
+            <blockquote>
+                "The most sustainable garment is the one already in your closet."
+            </blockquote>
+
+            <p>This stark reality is driving a fundamental shift in how we think about clothing. The concept of 'cost per wear' is replacing the obsession with low prices. Quality is triumphing over quantity. And timeless design is edging out fleeting trends.</p>
+
+            <h2>What True Sustainability Looks Like</h2>
+
+            <p>Real sustainability goes beyond marketing claims. It means transparent supply chains where every worker is paid fairly. It means using organic, recycled, or regenerative materials. It means designing for longevity and offering repair services. And it means taking responsibility for products at end-of-life through take-back programs.</p>
+
+            <p>The brands leading this transformation aren't just reducing harm—they're actively doing good. They're investing in renewable energy, restoring ecosystems, and building communities. They're proving that business can be a force for positive change.</p>
+        </div>
+
+        <div class="author">
+            <div class="author-photo">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200" alt="Sarah Chen">
+            </div>
+            <div>
+                <div class="author-name">Sarah Chen</div>
+                <div class="author-bio">Founder & CEO of Parr. Writing about sustainable fashion, conscious living, and building a better future.</div>
+            </div>
+        </div>
+    </article>
+
+    <section class="related">
+        <h2 class="related-title">More Stories</h2>
+        
+        <div class="related-grid">
+            <article class="related-card">
+                <div class="related-image">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600" alt="Related">
+                </div>
+                <div class="related-content">
+                    <a href="#" class="related-card-title">The Art of the Capsule Wardrobe</a>
+                </div>
+            </article>
+
+            <article class="related-card">
+                <div class="related-image">
+                    <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=600" alt="Related">
+                </div>
+                <div class="related-content">
+                    <a href="#" class="related-card-title">Paris Fashion Week: The Sustainability Shift</a>
+                </div>
+            </article>
+
+            <article class="related-card">
+                <div class="related-image">
+                    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600" alt="Related">
+                </div>
+                <div class="related-content">
+                    <a href="#" class="related-card-title">Morning Rituals of Successful Women</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-logo">PARR</div>
+        
+        <nav class="footer-nav">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Contact</a>
+        </nav>
+    </footer>
+</body>
+</html>

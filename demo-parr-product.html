@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linen Blazer — Parr</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #D4653B;
+            --dark: #1A1A1A;
+            --light: #F5F5F5;
+            --white: #FFFFFF;
+            --gray: #666666;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            border-bottom: 1px solid #eee;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-decoration: none;
+            color: var(--dark);
+        }
+        
+        .nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+        
+        .nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        
+        .nav a:hover, .nav a.active {
+            color: var(--primary);
+        }
+        
+        /* Product */
+        .product {
+            padding: 8rem 3rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+        
+        /* Gallery */
+        .gallery {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .gallery-thumbs {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .gallery-thumb {
+            width: 80px;
+            height: 100px;
+            background: #f5f5f5;
+            cursor: pointer;
+            border: 2px solid transparent;
+            overflow: hidden;
+        }
+        
+        .gallery-thumb.active {
+            border-color: var(--dark);
+        }
+        
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-main {
+            flex: 1;
+            aspect-ratio: 3/4;
+            background: #f5f5f5;
+            overflow: hidden;
+        }
+        
+        .gallery-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Details */
+        .details {
+            padding-top: 2rem;
+        }
+        
+        .product-badge {
+            display: inline-block;
+            background: var(--dark);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        
+        .product-description {
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        
+        /* Options */
+        .option-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .option-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        
+        .size-options {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .size-btn {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #ddd;
+            background: white;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .size-btn:hover, .size-btn.active {
+            background: var(--dark);
+            color: white;
+            border-color: var(--dark);
+        }
+        
+        /* Quantity */
+        .quantity {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ddd;
+            background: white;
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+        
+        .qty-input {
+            width: 60px;
+            height: 40px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 1rem;
+        }
+        
+        /* Add to Cart */
+        .add-to-cart {
+            width: 100%;
+            padding: 1.25rem;
+            background: var(--dark);
+            color: white;
+            border: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-bottom: 1rem;
+        }
+        
+        .add-to-cart:hover {
+            background: var(--primary);
+        }
+        
+        .wishlist-btn {
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            border: 1px solid #ddd;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .wishlist-btn:hover {
+            border-color: var(--dark);
+        }
+        
+        /* Features */
+        .features {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 4rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #e5e5e5;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .footer-nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-nav a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+        
+        @media (max-width: 768px) {
+            .product-grid { grid-template-columns: 1fr; }
+            .nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="demo-parr.html" class="logo">PARR</a>
+        <nav class="nav">
+            <a href="demo-parr.html">Home</a>
+            <a href="demo-parr-about.html">About</a>
+            <a href="demo-parr-shop.html" class="active">Shop</a>
+            <a href="demo-parr-blog.html">Blog</a>
+            <a href="demo-parr-contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="product">
+        <div class="product-grid">
+            <div class="gallery">
+                <div class="gallery-thumbs">
+                    <div class="gallery-thumb active">
+                        <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=200" alt="Front">
+                    </div>
+                    <div class="gallery-thumb">
+                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=200" alt="Back">
+                    </div>
+                    <div class="gallery-thumb">
+                        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=200" alt="Detail">
+                    </div>
+                </div>
+                
+                <div class="gallery-main">
+                    <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800" alt="Linen Blazer">
+                </div>
+            </div>
+            
+            <div class="details">
+                <span class="product-badge">New Arrival</span>
+                
+                <h1 class="product-name">Oversized Linen Blazer</h1>
+                
+                <div class="product-price">$189</div>
+                
+                <p class="product-description">Crafted from 100% European linen, this oversized blazer combines relaxed sophistication with breathable comfort. The unstructured silhouette and single-button closure create an effortlessly chic look perfect for any occasion.</p>
+                
+                <div class="option-group">
+                    <label class="option-label">Select Size</label>
+                    <div class="size-options">
+                        <button class="size-btn">XS</button>
+                        <button class="size-btn active">S</button>
+                        <button class="size-btn">M</button>
+                        <button class="size-btn">L</button>
+                        <button class="size-btn">XL</button>
+                    </div>
+                </div>
+                
+                <div class="quantity">
+                    <label class="option-label" style="margin-bottom: 0;">Quantity</label>
+                    <button class="qty-btn">-</button>
+                    <input type="number" class="qty-input" value="1" min="1">
+                    <button class="qty-btn">+</button>
+                </div>
+                
+                <button class="add-to-cart">Add to Cart — $189</button>
+                
+                <button class="wishlist-btn">♡ Add to Wishlist</button>
+                
+                <div class="features">
+                    <div class="feature">✓ Free shipping on orders over $150</div>
+                    <div class="feature">✓ 30-day hassle-free returns</div>
+                    <div class="feature">✓ Sustainably made in Portugal</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-logo">PARR</div>
+        
+        <nav class="footer-nav">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Contact</a>
+        </nav>
+    </footer>
+</body>
+</html>

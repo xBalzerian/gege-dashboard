@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Parr</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #D4653B;
+            --dark: #1A1A1A;
+            --light: #F5F5F5;
+            --white: #FFFFFF;
+            --gray: #666666;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            border-bottom: 1px solid #eee;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-decoration: none;
+            color: var(--dark);
+        }
+        
+        .nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+        
+        .nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        
+        .nav a:hover, .nav a.active {
+            color: var(--primary);
+        }
+        
+        /* Page Header */
+        .page-header {
+            padding: 10rem 3rem 4rem;
+            background: var(--light);
+            text-align: center;
+        }
+        
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .page-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray);
+        }
+        
+        /* Contact */
+        .contact {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+        }
+        
+        /* Info */
+        .contact-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info p {
+            color: var(--gray);
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+        
+        .info-item {
+            margin-bottom: 2rem;
+        }
+        
+        .info-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-value {
+            font-size: 1.125rem;
+        }
+        
+        /* Form */
+        .contact-form {
+            background: var(--light);
+            padding: 3rem;
+        }
+        
+        .form-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--dark);
+        }
+        
+        textarea.form-input {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-submit {
+            width: 100%;
+            padding: 1.25rem;
+            background: var(--dark);
+            color: white;
+            border: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .form-submit:hover {
+            background: var(--primary);
+        }
+        
+        /* Locations */
+        .locations {
+            background: var(--dark);
+            color: white;
+            padding: 6rem 3rem;
+        }
+        
+        .locations-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .locations-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+        
+        .location {
+            text-align: center;
+        }
+        
+        .location-city {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .location-address {
+            color: #999;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 4rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #e5e5e5;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .footer-nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-nav a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+        
+        @media (max-width: 768px) {
+            .contact { grid-template-columns: 1fr; gap: 3rem; }
+            .locations-grid { grid-template-columns: 1fr; }
+            .nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="demo-parr.html" class="logo">PARR</a>
+        <nav class="nav">
+            <a href="demo-parr.html">Home</a>
+            <a href="demo-parr-about.html">About</a>
+            <a href="demo-parr-shop.html">Shop</a>
+            <a href="demo-parr-blog.html">Blog</a>
+            <a href="demo-parr-contact.html" class="active">Contact</a>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1 class="page-title">Get in Touch</h1>
+        <p class="page-subtitle">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+    </section>
+
+    <section class="contact">
+        <div class="contact-info">
+            <h2>Let's Start a Conversation</h2>
+            
+            <p>Whether you have a question about our products, need help with an order, or want to explore partnership opportunities, our team is here to help.</p>
+            
+            <div class="info-item">
+                <div class="info-label">Email</div>
+                <div class="info-value">hello@parr.com</div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-label">Phone</div>
+                <div class="info-value">+1 (555) 123-4567</div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-label">Hours</div>
+                <div class="info-value">Mon–Fri: 9am–6pm EST</div>
+            </div>
+        </div>
+        
+        <form class="contact-form">
+            <h3 class="form-title">Send a Message</h3>
+            
+            <div class="form-group">
+                <label class="form-label">Your Name</label>
+                <input type="text" class="form-input" placeholder="Jane Doe">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-input" placeholder="jane@example.com">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Subject</label>
+                <select class="form-input">
+                    <option>General Inquiry</option>
+                    <option>Order Support</option>
+                    <option>Partnerships</option>
+                    <option>Press</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Message</label>
+                <textarea class="form-input" placeholder="How can we help you?"></textarea>
+            </div>
+            
+            <button type="submit" class="form-submit">Send Message</button>
+        </form>
+    </section>
+
+    <section class="locations">
+        <div class="locations-container">
+            <h2 class="locations-title">Visit Our Stores</h2>
+            
+            <div class="locations-grid">
+                <div class="location">
+                    <div class="location-city">New York</div>
+                    <div class="location-address">
+                        123 Fashion Avenue<br>
+                        SoHo, NY 10012<br>
+                        +1 (212) 555-0100
+                    </div>
+                </div>
+                
+                <div class="location">
+                    <div class="location-city">Los Angeles</div>
+                    <div class="location-address">
+                        456 Melrose Place<br>
+                        West Hollywood, CA 90069<br>
+                        +1 (310) 555-0200
+                    </div>
+                </div>
+                
+                <div class="location">
+                    <div class="location-city">London</div>
+                    <div class="location-address">
+                        78 Carnaby Street<br>
+                        Soho, London W1F 9PP<br>
+                        +44 20 7946 0958
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-logo">PARR</div>
+        
+        <nav class="footer-nav">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Contact</a>
+        </nav>
+    </footer>
+</body>
+</html>
