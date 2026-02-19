@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory · Gege Mission Control</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0f; color: #fff; min-height: 100vh; }
+        
+        .app { display: grid; grid-template-columns: 260px 1fr; }
+        .sidebar { background: rgba(20,20,28,0.9); border-right: 1px solid rgba(255,255,255,0.06); padding: 24px 20px; position: fixed; left: 0; top: 0; bottom: 0; width: 260px; }
+        .main { margin-left: 260px; padding: 32px; }
+        
+        .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+        .brand-icon { width: 44px; height: 44px; background: linear-gradient(135deg, #ff6b9d, #ff8fab); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        .brand-text { font-size: 1.5rem; font-weight: 700; }
+        
+        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 16px; color: #888; text-decoration: none; margin-bottom: 4px; transition: all 0.2s; }
+        .nav-item:hover { background: rgba(255,255,255,0.03); color: #fff; }
+        .nav-item.active { background: rgba(255,107,157,0.15); color: #ffb3c1; }
+        
+        .header { margin-bottom: 32px; }
+        .header-title { font-size: 1.75rem; font-weight: 700; }
+        
+        .search-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+        .search-box input { background: transparent; border: none; color: #fff; font-size: 1rem; width: 100%; outline: none; }
+        .search-box input::placeholder { color: #666; }
+        
+        .memory-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: all 0.2s;
+        }
+        
+        .memory-item:hover { border-color: rgba(255,107,157,0.2); }
+        .memory-header { display: flex; justify-content: space-between; margin-bottom: 12px; }
+        .memory-title { font-weight: 600; }
+        .memory-date { color: #888; font-size: 0.875rem; }
+        .memory-preview { color: #888; line-height: 1.6; }
+        .memory-tags { display: flex; gap: 8px; margin-top: 16px; }
+        .tag { padding: 6px 12px; border-radius: 100px; font-size: 0.75rem; font-weight: 600; }
+        .tag-design { background: rgba(255,107,157,0.15); color: #ff6b9d; }
+        .tag-dev { background: rgba(0,184,255,0.15); color: #00b8ff; }
+        
+        @media (max-width: 1200px) {
+            .sidebar { display: none; }
+            .main { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">🌸</div>
+                <div class="brand-text">Gege</div>
+            </div>
+            <a href="index.html" class="nav-item">📊 Dashboard</a>
+            <a href="tasks.html" class="nav-item">✓ Tasks</a>
+            <a href="content.html" class="nav-item">📝 Content</a>
+            <a href="calendar.html" class="nav-item">📅 Calendar</a>
+            <a href="memory.html" class="nav-item active">🧠 Memory</a>
+            <a href="team.html" class="nav-item">👥 Team</a>
+            <a href="office.html" class="nav-item">🏢 Office</a>
+        </aside>
+
+        <main class="main">
+            <div class="header">
+                <h1 class="header-title">Memory</h1>
+            </div>
+
+            <div class="search-box">
+                <span>🔍</span>
+                <input type="text" placeholder="Search memories...">
+            </div>
+
+            <div class="memory-item">
+                <div class="memory-header">
+                    <span class="memory-title">Parr Theme Development</span>
+                    <span class="memory-date">Feb 19, 2025</span>
+                </div>
+                <div class="memory-preview">Built complete 7-page fashion e-commerce theme with Sakura pink + matte black aesthetic. Includes homepage, shop, about, blog, product, article, and contact pages.</div>
+                <div class="memory-tags">
+                    <span class="tag tag-design">Design</span>
+                    <span class="tag tag-dev">Dev</span>
+                </div>
+            </div>
+
+            <div class="memory-item">
+                <div class="memory-header">
+                    <span class="memory-title">$1M Project Strategy</span>
+                    <span class="memory-date">Feb 19, 2025</span>
+                </div>
+                <div class="memory-preview">Plan to build $1M digital product empire by end of 2026. Strategy includes aesthetic planners, Notion templates, digital journals. Traffic via Pinterest/Instagram/TikTok.</div>
+            </div>
+
+            <div class="memory-item">
+                <div class="memory-header">
+                    <span class="memory-title">Client Automation System</span>
+                    <span class="memory-date">Feb 19, 2025</span>
+                </div>
+                <div class="memory-preview">Planning 5-client content automation with dedicated agents per client. WordPress + Elementor only. Human review before publish. Monthly retainer model.</div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
