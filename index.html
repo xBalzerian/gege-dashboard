@@ -350,14 +350,17 @@
         .board {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: var(--space-md);
+            gap: var(--space-lg);
+            overflow-x: auto;
+            padding-bottom: var(--space-md);
         }
 
         .board-column {
             background: var(--md-sys-color-surface-variant);
             border-radius: var(--shape-xl);
             padding: var(--space-lg);
-            min-height: 500px;
+            min-width: 280px;
+            max-width: 320px;
         }
 
         .board-header {
