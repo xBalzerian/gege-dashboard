@@ -3,304 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linen Blazer — Parr</title>
+    <title>Oversized Linen Blazer — Parr</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        :root {
-            --primary: #D4653B;
-            --dark: #1A1A1A;
-            --light: #F5F5F5;
-            --white: #FFFFFF;
-            --gray: #666666;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--white);
-            color: var(--dark);
-            line-height: 1.6;
-        }
-        
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            padding: 1.5rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--white);
-            border-bottom: 1px solid #eee;
-        }
-        
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.75rem;
-            font-weight: 700;
-            letter-spacing: -1px;
-            text-decoration: none;
-            color: var(--dark);
-        }
-        
-        .nav {
-            display: flex;
-            gap: 2.5rem;
-        }
-        
-        .nav a {
-            text-decoration: none;
-            color: var(--dark);
-            font-size: 0.875rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.3s;
-        }
-        
-        .nav a:hover, .nav a.active {
-            color: var(--primary);
-        }
-        
-        /* Product */
-        .product {
-            padding: 8rem 3rem 4rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .product-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-        }
-        
-        /* Gallery */
-        .gallery {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .gallery-thumbs {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .gallery-thumb {
-            width: 80px;
-            height: 100px;
-            background: #f5f5f5;
-            cursor: pointer;
-            border: 2px solid transparent;
-            overflow: hidden;
-        }
-        
-        .gallery-thumb.active {
-            border-color: var(--dark);
-        }
-        
-        .gallery-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .gallery-main {
-            flex: 1;
-            aspect-ratio: 3/4;
-            background: #f5f5f5;
-            overflow: hidden;
-        }
-        
-        .gallery-main img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        /* Details */
-        .details {
-            padding-top: 2rem;
-        }
-        
-        .product-badge {
-            display: inline-block;
-            background: var(--dark);
-            color: white;
-            padding: 0.5rem 1rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1.5rem;
-        }
-        
-        .product-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        
-        .product-price {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-        }
-        
-        .product-description {
-            color: var(--gray);
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-        }
-        
-        /* Options */
-        .option-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .option-label {
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.75rem;
-            display: block;
-        }
-        
-        .size-options {
-            display: flex;
-            gap: 0.75rem;
-        }
-        
-        .size-btn {
-            width: 50px;
-            height: 50px;
-            border: 1px solid #ddd;
-            background: white;
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .size-btn:hover, .size-btn.active {
-            background: var(--dark);
-            color: white;
-            border-color: var(--dark);
-        }
-        
-        /* Quantity */
-        .quantity {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .qty-btn {
-            width: 40px;
-            height: 40px;
-            border: 1px solid #ddd;
-            background: white;
-            font-size: 1.25rem;
-            cursor: pointer;
-        }
-        
-        .qty-input {
-            width: 60px;
-            height: 40px;
-            border: 1px solid #ddd;
-            text-align: center;
-            font-size: 1rem;
-        }
-        
-        /* Add to Cart */
-        .add-to-cart {
-            width: 100%;
-            padding: 1.25rem;
-            background: var(--dark);
-            color: white;
-            border: none;
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin-bottom: 1rem;
-        }
-        
-        .add-to-cart:hover {
-            background: var(--primary);
-        }
-        
-        .wishlist-btn {
-            width: 100%;
-            padding: 1rem;
-            background: transparent;
-            border: 1px solid #ddd;
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .wishlist-btn:hover {
-            border-color: var(--dark);
-        }
-        
-        /* Features */
-        .features {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #eee;
-        }
-        
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.875rem;
-            color: var(--gray);
-        }
-        
-        /* Footer */
-        .footer {
-            padding: 4rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #e5e5e5;
-        }
-        
-        .footer-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        
-        .footer-nav {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .footer-nav a {
-            color: var(--gray);
-            text-decoration: none;
-            font-size: 0.875rem;
-        }
-        
-        @media (max-width: 768px) {
-            .product-grid { grid-template-columns: 1fr; }
-            .nav { display: none; }
-        }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        :root{--primary:#D4653B;--dark:#1A1A1A;--light:#F8F7F5;--white:#FFFFFF;--gray:#6B6B6B;--transition:all 0.3s ease}
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--white);color:var(--dark);line-height:1.6}
+        .header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.25rem 4rem;display:flex;justify-content:space-between;align-items:center;background:var(--white);border-bottom:1px solid #eee}
+        .logo{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:600;text-decoration:none;color:var(--dark)}
+        .nav{display:flex;gap:3rem}
+        .nav a{text-decoration:none;color:var(--dark);font-size:.8125rem;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;transition:var(--transition)}
+        .nav a:hover,.nav a.active{color:var(--primary)}
+        .mobile-menu-btn{display:none;flex-direction:column;gap:5px;cursor:pointer}
+        .mobile-menu-btn span{width:24px;height:2px;background:var(--dark)}
+        .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--white);z-index:999;padding:6rem 2rem;flex-direction:column;gap:2rem}
+        .mobile-menu.active{display:flex}
+        .mobile-menu a{font-family:'Playfair Display',serif;font-size:2rem;text-decoration:none;color:var(--dark);padding:1rem 0;border-bottom:1px solid #eee}
+        .mobile-menu-close{position:absolute;top:1.5rem;right:2rem;font-size:2rem;cursor:pointer}
+        .product-page{padding:8rem 4rem 4rem;max-width:1400px;margin:0 auto}
+        .product-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
+        .gallery{display:flex;gap:1rem}
+        .gallery-thumbs{display:flex;flex-direction:column;gap:1rem}
+        .gallery-thumb{width:80px;height:100px;background:var(--light);cursor:pointer;border:2px solid transparent;overflow:hidden}
+        .gallery-thumb.active{border-color:var(--dark)}
+        .gallery-thumb img{width:100%;height:100%;object-fit:cover}
+        .gallery-main{flex:1;aspect-ratio:3/4;background:var(--light);overflow:hidden}
+        .gallery-main img{width:100%;height:100%;object-fit:cover}
+        .details{padding-top:2rem}
+        .product-badge{display:inline-block;background:var(--dark);color:var(--white);padding:.5rem 1rem;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.5rem}
+        .product-name{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:600;margin-bottom:1rem}
+        .product-price{font-size:1.5rem;font-weight:600;margin-bottom:2rem}
+        .product-description{color:var(--gray);font-size:1rem;line-height:1.8;margin-bottom:2rem}
+        .option-group{margin-bottom:1.5rem}
+        .option-label{display:block;font-size:.875rem;font-weight:500;margin-bottom:.75rem;text-transform:uppercase;letter-spacing:1px}
+        .size-options{display:flex;gap:.75rem}
+        .size-btn{width:50px;height:50px;border:1px solid #ddd;background:var(--white);font-size:.875rem;cursor:pointer;transition:var(--transition)}
+        .size-btn:hover,.size-btn.active{background:var(--dark);color:var(--white);border-color:var(--dark)}
+        .quantity{display:flex;align-items:center;gap:1rem;margin-bottom:2rem}
+        .qty-btn{width:44px;height:44px;border:1px solid #ddd;background:var(--white);font-size:1.25rem;cursor:pointer}
+        .qty-input{width:60px;height:44px;border:1px solid #ddd;text-align:center;font-size:1rem}
+        .btn-add{width:100%;padding:1.25rem;background:var(--dark);color:var(--white);border:none;font-size:.875rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;cursor:pointer;transition:var(--transition);margin-bottom:1rem}
+        .btn-add:hover{background:var(--primary)}
+        .btn-wishlist{width:100%;padding:1rem;background:transparent;border:1px solid #ddd;font-size:.875rem;cursor:pointer;transition:var(--transition)}
+        .btn-wishlist:hover{border-color:var(--dark)}
+        .features{margin-top:3rem;padding-top:2rem;border-top:1px solid #eee}
+        .feature{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;font-size:.9375rem;color:var(--gray)}
+        .footer{padding:5rem 4rem 2rem;background:var(--dark);color:var(--white)}
+        .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem}
+        .footer-logo{font-family:'Playfair Display',serif;font-size:2rem;font-weight:600;margin-bottom:1.5rem;display:inline-block;color:var(--white);text-decoration:none}
+        .footer-desc{color:#999;font-size:.9375rem;line-height:1.7;margin-bottom:2rem}
+        .social{display:flex;gap:1rem}
+        .social a{width:40px;height:40px;border:1px solid #333;display:flex;align-items:center;justify-content:center;color:#999;text-decoration:none;font-size:.875rem;transition:var(--transition)}
+        .social a:hover{border-color:var(--primary);color:var(--primary)}
+        .footer-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;margin-bottom:1.5rem}
+        .footer-links{list-style:none}
+        .footer-links li{margin-bottom:.75rem}
+        .footer-links a{color:#999;text-decoration:none;font-size:.9375rem;transition:var(--transition)}
+        .footer-links a:hover{color:var(--white)}
+        .footer-bottom{padding-top:2rem;border-top:1px solid #333;display:flex;justify-content:space-between;align-items:center}
+        .footer-copy{color:#666;font-size:.8125rem}
+        @media(max-width:1024px){.product-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:768px){.header{padding:1rem 1.5rem}.nav{display:none}.mobile-menu-btn{display:flex}.product-page{padding:6rem 1.5rem 2rem}.gallery-thumbs{display:none}.footer{padding:3rem 1.5rem}.footer-grid{grid-template-columns:1fr}}
     </style>
 </head>
 <body>
@@ -308,42 +72,41 @@
         <a href="demo-parr.html" class="logo">PARR</a>
         <nav class="nav">
             <a href="demo-parr.html">Home</a>
+            <a href="demo-parr-shop.html">Shop</a>
             <a href="demo-parr-about.html">About</a>
-            <a href="demo-parr-shop.html" class="active">Shop</a>
-            <a href="demo-parr-blog.html">Blog</a>
+            <a href="demo-parr-blog.html">Journal</a>
             <a href="demo-parr-contact.html">Contact</a>
         </nav>
+        <div class="mobile-menu-btn" onclick="document.getElementById('mobileMenu').classList.toggle('active')">
+            <span></span><span></span><span></span>
+        </div>
     </header>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-close" onclick="document.getElementById('mobileMenu').classList.toggle('active')">×</div>
+        <a href="demo-parr.html">Home</a>
+        <a href="demo-parr-shop.html">Shop</a>
+        <a href="demo-parr-about.html">About</a>
+        <a href="demo-parr-blog.html">Journal</a>
+        <a href="demo-parr-contact.html">Contact</a>
+    </div>
 
-    <section class="product">
+    <section class="product-page">
         <div class="product-grid">
             <div class="gallery">
                 <div class="gallery-thumbs">
-                    <div class="gallery-thumb active">
-                        <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=200" alt="Front">
-                    </div>
-                    <div class="gallery-thumb">
-                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=200" alt="Back">
-                    </div>
-                    <div class="gallery-thumb">
-                        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=200" alt="Detail">
-                    </div>
+                    <div class="gallery-thumb active"><img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=200" alt="Front"></div>
+                    <div class="gallery-thumb"><img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=200" alt="Back"></div>
+                    <div class="gallery-thumb"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=200" alt="Detail"></div>
                 </div>
-                
-                <div class="gallery-main">
-                    <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800" alt="Linen Blazer">
-                </div>
+                <div class="gallery-main"><img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800" alt="Linen Blazer"></div>
             </div>
-            
+
             <div class="details">
                 <span class="product-badge">New Arrival</span>
-                
                 <h1 class="product-name">Oversized Linen Blazer</h1>
-                
                 <div class="product-price">$189</div>
-                
-                <p class="product-description">Crafted from 100% European linen, this oversized blazer combines relaxed sophistication with breathable comfort. The unstructured silhouette and single-button closure create an effortlessly chic look perfect for any occasion.</p>
-                
+                <p class="product-description">Crafted from 100% European linen, this oversized blazer combines relaxed sophistication with breathable comfort. The unstructured silhouette and single-button closure create an effortlessly chic look.</p>
+
                 <div class="option-group">
                     <label class="option-label">Select Size</label>
                     <div class="size-options">
@@ -354,18 +117,17 @@
                         <button class="size-btn">XL</button>
                     </div>
                 </div>
-                
+
                 <div class="quantity">
-                    <label class="option-label" style="margin-bottom: 0;">Quantity</label>
+                    <label class="option-label" style="margin-bottom:0">Quantity</label>
                     <button class="qty-btn">-</button>
                     <input type="number" class="qty-input" value="1" min="1">
                     <button class="qty-btn">+</button>
                 </div>
-                
-                <button class="add-to-cart">Add to Cart — $189</button>
-                
-                <button class="wishlist-btn">♡ Add to Wishlist</button>
-                
+
+                <button class="btn-add" onclick="alert('Added to cart!')">Add to Cart — $189</button>
+                <button class="btn-wishlist">♡ Add to Wishlist</button>
+
                 <div class="features">
                     <div class="feature">✓ Free shipping on orders over $150</div>
                     <div class="feature">✓ 30-day hassle-free returns</div>
@@ -376,13 +138,17 @@
     </section>
 
     <footer class="footer">
-        <div class="footer-logo">PARR</div>
-        
-        <nav class="footer-nav">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Contact</a>
-        </nav>
+        <div class="footer-grid">
+            <div>
+                <a href="demo-parr.html" class="footer-logo">PARR</a>
+                <p class="footer-desc">Effortless style for the modern woman. Sustainably made, designed to last.</p>
+                <div class="social"><a href="#">IG</a><a href="#">FB</a><a href="#">PI</a><a href="#">YT</a></div>
+            </div>
+            <div><div class="footer-title">Shop</div><ul class="footer-links"><li><a href="demo-parr-shop.html">New Arrivals</a></li><li><a href="demo-parr-shop.html">Clothing</a></li><li><a href="demo-parr-shop.html">Accessories</a></li></ul></div>
+            <div><div class="footer-title">Company</div><ul class="footer-links"><li><a href="demo-parr-about.html">About Us</a></li><li><a href="demo-parr-blog.html">Journal</a></li><li><a href="demo-parr-contact.html">Contact</a></li></ul></div>
+            <div><div class="footer-title">Support</div><ul class="footer-links"><li><a href="#">FAQ</a></li><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><div class="footer-copy">© 2025 Parr. All rights reserved.</div></div>
     </footer>
 </body>
 </html>
